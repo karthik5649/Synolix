@@ -1,1 +1,30 @@
+# Environment variables
 .env
+.env.local
+.env.*
+
+# Node modules
+node_modules/
+*/node_modules/
+*/*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS
+.DS_Store
+*.swp
+
+# Build files (Client)
+dist/
+build/
+.vite/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
