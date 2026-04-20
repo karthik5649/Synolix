@@ -1,128 +1,131 @@
 # 🚀 Synolix — Social Media Platform
 
-## 📌 Overview
-
 Synolix is a full-stack social media platform designed to enable community-based interactions, real-time messaging, and dynamic group discussions. The platform supports scalable communication using WebSockets and provides secure authentication using Clerk with Google OAuth.
 
 ---
 
 ## ✨ Features
-
-* 🧑‍🤝‍🧑 Community-based interactions and group discussions
-* 💬 Real-time one-to-one and group chat using WebSockets
-* ⚡ Low-latency messaging with bidirectional communication
-* 🟢 Dynamic user presence tracking (online/offline status)
-* 🔐 Secure authentication using Clerk and Google OAuth 2.0
-* 📡 RESTful APIs for user, chat, and data management
+* 🧑‍🤝‍🧑 **Community-Based Interactions:** Join, leave, and chat within communities.
+* 💬 **Real-Time Messaging:** Instant one-to-one and group messaging powered by WebSockets (Socket.IO).
+* 🟢 **Dynamic User Presence:** Real-time online/offline status tracking.
+* 🔐 **Secure Authentication:** Identity management and Google OAuth login via Clerk.
+* 📡 **RESTful APIs:** Robust express backend for user, chat, and community data management.
+* 📱 **Responsive UI:** Built with React, Vite, and Bootstrap for a modern, seamless experience.
 
 ---
 
 ## 🛠️ Tech Stack
-
-* **Frontend:** React.js, HTML, CSS
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
-* **Real-Time:** WebSockets (Socket.IO)
-* **Authentication:** Clerk API, Google OAuth
-
----
-
-## 🧠 Architecture
-
-The application follows a client-server architecture:
-
-* React frontend handles UI and user interactions
-* Node.js backend manages APIs and business logic
-* MongoDB stores user, chat, and message data
-* WebSockets enable real-time communication
+* **Frontend:** React.js, Vite, Bootstrap, Socket.IO Client, Clerk React SDK
+* **Backend:** Node.js, Express.js, Socket.IO, Multer
+* **Database:** MongoDB & Mongoose
+* **Authentication:** Clerk API
 
 ---
 
 ## 🚀 Getting Started
 
 ### 🔹 Prerequisites
+* [Node.js](https://nodejs.org/en/) installed
+* [MongoDB](https://www.mongodb.com/try/download/community) installed and running locally on port 27017 (or a cloud MongoDB URI).
+* A Clerk account for API keys.
 
-* Node.js installed
-* MongoDB (local or cloud)
-* Git installed
+---
+
+## 🔒 Environment Settings (.env configuration)
+
+To run this project fully, you need `.env` files in your **root**, **server**, and **client** directories.
+
+### 1️⃣ Global / Root Environment Variables
+Create a file named `.env` in the root of the project (outside of client and server) for global variables such as image uploading configurations.
+
+```env
+# /.env
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# Other environment variables
+PORT=3000
+DB_URL=mongodb://127.0.0.1:27017/community-app
+```
+
+### 2️⃣ Server Environment Variables
+Create a file named `.env` inside the `/server` directory and add the following keys. Replace the placeholder values with your actual credentials.
+
+```env
+# server/.env
+
+# Port for the Node.js server
+PORT=3000
+
+# MongoDB Connection String (127.0.0.1 is recommended for local development to avoid IPv6 issues)
+DB_URL=mongodb://127.0.0.1:27017/sewadproject
+DB_NAME=sewadproject
+
+# Clerk Authentication Keys (From your Clerk Dashboard)
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
+
+### 3️⃣ Client Environment Variables
+Create a file named `.env.local` inside the `/client` directory and add the following keys.
+
+```env
+# client/.env.local
+
+# Clerk Publishable Key (Must start with VITE_ to be exposed to your React app)
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+```
 
 ---
 
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
-
-```
+```bash
 git clone https://github.com/karthik5649/synolix.git
 cd synolix
 ```
 
----
-
 ### 2️⃣ Setup Backend
-
-```
+Install the backend dependencies and start the Node server.
+```bash
 cd server
 npm install
+node server.js
 ```
-
-Create a `.env` file:
-
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection
-CLERK_API_KEY=your_clerk_key
-```
-
-Run backend:
-
-```
-npm start
-```
-
----
 
 ### 3️⃣ Setup Frontend
-
-```
+Open a new terminal window, install the frontend dependencies, and start the Vite development server.
+```bash
 cd client
 npm install
-npm start
+npm run dev
 ```
 
----
-
 ### 4️⃣ Run the Application
+* **Frontend UI:** `http://localhost:5173`
+* **Backend API:** `http://localhost:3000`
 
-* Frontend: http://localhost:3000
-* Backend: http://localhost:5000
-
----
-
-## 🔐 Authentication
-
-* Implemented using Clerk API
-* Supports Google OAuth login
-* Secure session and user management
+Your Websocket proxy automatically routes between them!
 
 ---
 
 ## 📈 Future Improvements
-
-* Push notifications
-* Media sharing (images/videos)
+* Push notifications implementation
+* Advanced media sharing via Cloudinary
 * AI-based content moderation
 * Scalable microservices architecture
 
 ---
 
 ## 🤝 Contributing
-
-Feel free to fork the repository and submit pull requests.
+Feel free to fork the repository, make enhancements, and submit pull requests!
 
 ---
 
 ## 📧 Contact
-
-Karthik Reddy
+**Karthik Reddy**  
 Email: [palakolukarthikreddy@gmail.com](mailto:palakolukarthikreddy@gmail.com)
