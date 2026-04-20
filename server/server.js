@@ -27,8 +27,8 @@ mongoose.connect(process.env.DB_URL)
             console.log(`server is running on port ${port}`)
         })
         console.log("Db is connected")
-    }).catch(() => {
-        console.log("Error in connection with db")
+    }).catch((err) => {
+        console.log("Error in connection with db : ",err)
     })
 
 app.use(exp.json())

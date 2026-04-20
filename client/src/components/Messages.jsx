@@ -16,16 +16,38 @@ function Messages() {
   // Create socket connection only once using useRef
   const socketRef = useRef(null);
   useEffect(() => {
-    // Initialize socket connection if it doesn't exist
-    if (!socketRef.current) {
-      socketRef.current = io('http://localhost:3000');
-    }
+    const socket = io('http://localhost:3000');
+    socketRef.current = socket;
+
+    socket.on('connect', () => {
+      let cuser = JSON.parse(localStorage.getItem("currentuser"));
+      if (cuser && cuser.userName) {
+        socket.emit('join_room', cuser.userName);
+      }
+    });
+
+    const handleMessage = (data) => {
+      let suser = JSON.parse(localStorage.getItem("selecteduser"));
+      if (!suser || !data || !data[0]) return;
+
+      console.log("Sender:", data[0].senderUserName, "Selected User:", suser.userName);
+      if (data[0].senderUserName === suser.userName) {
+        setMsgs((prevChat) => {
+          if (prevChat.some(msg => msg.messageId === data[0].messageId)) {
+            return prevChat;
+          }
+          return [...prevChat, data[0]];
+        });
+      }
+    };
+
+    socket.on("receive_message", handleMessage);
 
     // Clean up socket connection on component unmount
     return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-      }
+      socket.off("receive_message", handleMessage);
+      socket.disconnect();
+      socketRef.current = null;
     };
   }, []);
 
@@ -99,39 +121,7 @@ function Messages() {
     scrollToBottom();
   });
 
-  // socket joins room
-  useEffect(() => {
-    if (socketRef.current) {
-      let cuser = JSON.parse(localStorage.getItem("currentuser"))
-      socketRef.current.emit('join_room', cuser.userName)
-    }
-  }, [socketRef.current]);
 
-  // receives msg
-  useEffect(() => {
-    if (!socketRef.current) return;
-
-    const handleMessage = (data) => {
-      let suser = JSON.parse(localStorage.getItem("selecteduser"))
-      if (!suser || !data || !data[0]) return;
-
-      console.log(data[0].senderUserName)
-      console.log(suser.userName)
-      if (data[0].senderUserName === suser.userName) {
-        setMsgs((prevChat) => [...prevChat, data[0]]);
-      }
-    };
-
-    socketRef.current.on("receive_message", handleMessage);
-
-    // ✅ Clean up listener to prevent duplication
-    return () => {
-      if (socketRef.current) {
-        socketRef.current.off("receive_message");
-      }
-    };
-
-  }, [socketRef.current])
 
   // Initialize component and load data
   useEffect(() => {
