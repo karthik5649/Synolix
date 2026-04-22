@@ -33,25 +33,9 @@ Synolix is a full-stack social media platform designed to enable community-based
 
 ## 🔒 Environment Settings (.env configuration)
 
-To run this project fully, you need `.env` files in your **root**, **server**, and **client** directories.
+To run this project fully, you need `.env` files in your **server**, and **client** directories.
 
-### 1️⃣ Global / Root Environment Variables
-Create a file named `.env` in the root of the project (outside of client and server) for global variables such as image uploading configurations.
-
-```env
-# /.env
-
-# Cloudinary Configuration
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-
-# Other environment variables
-PORT=3000
-DB_URL=mongodb://127.0.0.1:27017/community-app
-```
-
-### 2️⃣ Server Environment Variables
+### 1️⃣ Server Environment Variables
 Create a file named `.env` inside the `/server` directory and add the following keys. Replace the placeholder values with your actual credentials.
 
 ```env
@@ -69,7 +53,7 @@ CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 ```
 
-### 3️⃣ Client Environment Variables
+### 2️⃣ Client Environment Variables
 Create a file named `.env.local` inside the `/client` directory and add the following keys.
 
 ```env
